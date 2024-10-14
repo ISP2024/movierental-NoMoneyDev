@@ -2,6 +2,7 @@ from rental import Rental
 from movie import Movie
 import logging
 
+
 class Customer:
     """A customer who rents movies.
 
@@ -19,22 +20,20 @@ class Customer:
         """Add a rental for this customer"""
         if rental not in self.rentals:
             self.rentals.append(rental)
-    
+
     def get_name(self):
         """Get the customer's name."""
         return self.name
-    
+
     def statement(self):
         """Create a statement of rentals for the current period.
 
         Print all the rentals in the current period, 
         along with total charges and frequent renter points.
-        
+
         Returns:
             the statement as a String
         """
-        total_amount = self.total_amount()  # total rental charges
-        frequent_renter_points = 0
         # the .format method substitutes actual values into the fmt string
         statement = f"Rental Report for {self.name}\n\n"
         header_fmt = "{:40s}  {:6s} {:6s}\n"
@@ -43,7 +42,6 @@ class Customer:
 
         for rental in self.rentals:
             # compute the frequent renter points based on movie price code
-            frequent_renter_points += rental.rental_points()
             #  add a detail line to statement
             statement += rental_fmt.format(
                             rental.get_movie().get_title(),
@@ -52,10 +50,12 @@ class Customer:
         # footer: summary of charges
         statement += "\n"
         statement += "{:40s}  {:6s} {:6.2f}\n".format(
-                       "Total Charges", "", total_amount)
-        statement += "Frequent Renter Points earned: {}\n".format(frequent_renter_points)
-
+                       "Total Charges", "", self.total_amount())
+        statement += "Frequent Renter Points earned: {}\n".format(self.get_rental_point())
         return statement
 
     def total_amount(self):
         return sum(rental.get_price() for rental in self.rentals)
+
+    def get_rental_point(self):
+        return sum(rental.rental_points() for rental in self.rentals)
