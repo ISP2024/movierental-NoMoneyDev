@@ -1,6 +1,7 @@
 from movie import Movie
 from pricing import REGULAR, NEW_RELEASE, CHILDREN
 import logging
+import datetime
 
 
 class Rental:
@@ -41,3 +42,11 @@ class Rental:
 
     def rental_points(self):
         return self.get_price_code().get_rental_points(self.days_rented)
+
+    def price_code_for_movie(self, movie: Movie):
+        year = datetime.date.today().year
+        if movie.year == year:
+            return NEW_RELEASE
+        if any(g in ["Children", "Childrens"] for g in movie.genre):
+            return CHILDREN
+        return REGULAR
