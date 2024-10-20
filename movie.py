@@ -1,26 +1,21 @@
-from pricing import REGULAR, NEW_RELEASE, CHILDREN
+from dataclasses import dataclass
 
 
+@dataclass(frozen=True)
 class Movie:
     """
     A movie available for rent.
     """
-    # The types of movies (price_code).
-    REGULAR = REGULAR
-    NEW_RELEASE = NEW_RELEASE
-    CHILDRENS = CHILDREN
-
-    def __init__(self, title, price_code):
-        # Initialize a new movie.
-        self.title = title
-        self.price_code = price_code
-
-    def get_price_code(self):
-        # get the price code
-        return self.price_code
+    # Initialize a new movie.
+    title: str
+    year: int
+    genre: list[str]
 
     def get_title(self):
         return self.title
 
+    def is_genre(self, check_genre):
+        return check_genre.lower() in [g.lower() for g in self.genre]
+
     def __str__(self):
-        return self.title
+        return f"{self.get_title} ({self.year})"
