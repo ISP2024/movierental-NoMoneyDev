@@ -20,4 +20,6 @@ See [Resources](https://cpske.github.io/ISP/assignment/movierental/movierental-p
 
 ## Rationale
 
-2.1: 
+2.1: Inappropriate Intimacy
+
+2.2: SRP. Movie class, as the name suggests, should only hold data for a movie and not its pricing methods.
