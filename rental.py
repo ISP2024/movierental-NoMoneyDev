@@ -1,6 +1,5 @@
 from movie import Movie
 from pricing import REGULAR, NEW_RELEASE, CHILDREN
-import logging
 
 
 class Rental:

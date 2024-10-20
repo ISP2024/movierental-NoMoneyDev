@@ -27,5 +27,4 @@ if __name__ == '__main__':
         if movie:
             customer.add_rental(Rental(movie, days))
         days = (days + 2) % 5 + 1
-    print(make_movies(catalog))
     print(customer.statement())
